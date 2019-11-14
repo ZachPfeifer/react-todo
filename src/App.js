@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import uuid from 'uuid'
+// import uuid from 'uuid'
 import './App.css';
 import Todos from './components/Todos.js';
 import AddTodo from './components/AddTodo.js';
@@ -32,17 +32,27 @@ class App extends Component {
 
   // Delete TODO 
   deleteTodo = (id) => {
-    this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] })
+    Axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+      .then(res => this.setState({
+        todos:
+          [...this.state.todos.filter(todo => todo.id !== id)]
+      })
+      )
   }
+
   //Add TODO 
   addTodo = (title) => {
-    const newTodo = {
-      id: uuid.v4(),
+    Axios.post('https://jsonplaceholder.typicode.com/todos', {
       title: title,
       completed: false
-    }
-    this.setState({ todos: [...this.state.todos, newTodo] })
+    })
+      .then(res => this.setState({
+        todos:
+          [...this.state.todos, res.data]
+      })
+      )
   }
+
 
   //App
   render() {

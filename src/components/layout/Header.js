@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom'
 //Functional Component
 function Header() {
   return (
-    <header style={headerStyle}>
+    <header
+      // @ts-ignore
+      style={headerStyle}>
       <h1>Todo List</h1>
       <span>
 
