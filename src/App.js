@@ -13,16 +13,16 @@ class App extends Component {
     todos: []
   }
   componentDidMount() {
-    Axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
-      .then(res => this.setState({ todos: res.data }))
+    Axios.get('https://bcw-sandbox.herokuapp.com/api/zachp/todos?_limit=10')
+      .then(res => this.setState({ todos: res.data.data }))
   }
 
 
   //Toggle Complete
-  markComplete = (id) => {
+  markComplete = (_id) => {
     this.setState({
       todos: this.state.todos.map(todo => {
-        if (todo.id === id) {
+        if (todo._id === _id) {
           todo.completed = !todo.completed
         }
         return todo;
@@ -31,24 +31,24 @@ class App extends Component {
   }
 
   // Delete TODO 
-  deleteTodo = (id) => {
-    Axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+  deleteTodo = (_id) => {
+    Axios.delete(`https://bcw-sandbox.herokuapp.com/api/zachp/todos/${_id}`)
       .then(res => this.setState({
         todos:
-          [...this.state.todos.filter(todo => todo.id !== id)]
+          [...this.state.todos.filter(todo => todo._id !== _id)]
       })
       )
   }
 
   //Add TODO 
-  addTodo = (title) => {
-    Axios.post('https://jsonplaceholder.typicode.com/todos', {
-      title: title,
+  addTodo = (description) => {
+    Axios.post('https://bcw-sandbox.herokuapp.com/api/zachp/todos/', {
+      description: description,
       completed: false
     })
       .then(res => this.setState({
         todos:
-          [...this.state.todos, res.data]
+          [...this.state.todos, res.data.data]
       })
       )
   }

@@ -6,15 +6,15 @@ import PropTypes from 'prop-types'
 export class AddTodo extends Component {
 
   state = {
-    title: ''
+    description: ''
   }
 
   onChange = (e) => this.setState({ [e.target.name]: e.target.value }); //Looks for change in Add Todo Input (looks at name or value)
 
   onSubmit = (e) => {
     e.preventDefault()
-    this.props.addTodo(this.state.title)
-    this.setState({ title: '' })
+    this.props.addTodo(this.state.description)
+    this.setState({ description: '' })
   }
 
   //Add Todo
@@ -23,10 +23,10 @@ export class AddTodo extends Component {
       <form onSubmit={this.onSubmit} style={{ display: 'flex' }}>
         <input
           type='text'
-          name='title'
+          name='description'
           placeholder='Add Todo...'
           style={{ flex: '10', padding: '5px' }}
-          value={this.state.title}
+          value={this.state.description}
           onChange={this.onChange}
         />
         <input
